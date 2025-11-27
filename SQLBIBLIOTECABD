@@ -1,0 +1,34 @@
+CREATE DATABASE BibliotecaBD;
+USE BibliotecaBD;
+
+CREATE TABLE Livros(
+idLivro UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+tituloLivro VARCHAR (100) NOT NULL,
+anoPublicação INT DEFAULT 0,
+qtdExemplares INT DEFAULT 0,
+nomeAutor VARCHAR(100) NULL
+);
+
+CREATE TABLE Clientes(
+idCliente UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+nome VARCHAR (150) NOT NULL,
+email VARCHAR (150) NOT NULL,
+senha Decimal (10,0) PRIMARY KEY
+);
+
+CREATE TABLE Emprestimo(
+idEmprestimo UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+dataEmprestimo DATETIME NOT NULL,
+dataDevolucao DATETIME NOT NULL,
+idCliente UNIQUEIDENTIFIER NOT NULL,
+idLivro UNIQUEIDENTIFIER NOT NULL,
+CONSTRAINT FK_EmprestimoLivro FOREIGN KEY (idLivro) REFERENCES Livros(idLivro)
+CONSTRAINT FK_EmprestimoCliente FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente),
+);
+
+
+
+Livros (título, ano de publicação, quantidade de exemplares, nomeAutor)
+Clientes (nome, email, senha)
+Empréstimos (data de empréstimo, data de devolução, idLivro, idCliente)
+Incluir os atributos principais de cada entidade e as relações entre elas (cardinalidades).
