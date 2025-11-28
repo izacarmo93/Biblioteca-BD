@@ -1,12 +1,12 @@
 const sql = require("mssql");
 
-const config = {
-    user: "BDLivros",
+const config = {   
+    user: "sa",
     password: "123456789",
     server: "localhost",
-    database: "bibliotecaBD",
+    database: "BibliotecaBD",
     options: {
-        encrypt: false,
+        encrypt: true,
         trustServerCertificate: true
     }
 };
@@ -15,10 +15,19 @@ async function getConnection() {
     try {
         const pool = await sql.connect(config);
         return pool;
+
     } catch (error) {
-        console.error('erro na conexão com o banco de dados:', error);
-        throw error; // importante
+        console.error("Erro na conexão com o banco de dados:", error);
+        throw error;
     }
 }
 
-module.exports = {sql, getConnection};
+(async () => {
+    const pool = await getConnection();
+
+    if (pool) {
+        console.log("Conexão com o BD bem-sucedida!");
+    }
+})()
+
+module.exports = { sql, getConnection };

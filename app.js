@@ -1,13 +1,12 @@
 const express = require("express");
 const app = express();
-const livrosRoutes = require("./src/routes/livrosRoutes");
+const {livroRoutes} = require("./src/routes/livroRoutes");
 
 const PORT = 8081;
 
 app.use(express.json());
 
-// Rotas
-app.use("/", livrosRoutes);
+app.use("/", livroRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

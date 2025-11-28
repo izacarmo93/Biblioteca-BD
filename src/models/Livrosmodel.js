@@ -1,13 +1,11 @@
 const { sql, getConnection } = require("../config/db");
 
-const LivroModel = {
+const livrosModel = {
 
     buscarTodos: async () => {
         try {
             const pool = await getConnection();
-            const querySQL = 'SELECT * FROM Livros';
-
-            const result = await pool.request().query(querySQL);
+            const result = await pool.request().query("SELECT * FROM Livros");
             return result.recordset;
 
         } catch (error) {
@@ -23,15 +21,15 @@ const LivroModel = {
             const pool = await getConnection();
 
             const querySQL = `
-                INSERT INTO Livros (tituloLivro, anoPublicificacao, qtdExemplares, nomeAutor)
+                INSERT INTO Livros (tituloLivro, anoPublicacao, qtdExemplares, nomeAutor)
                 VALUES (@tituloLivro, @anoPublicacao, @qtdExemplares, @nomeAutor)
             `;
 
             await pool.request()
-                .input('tituloLivro', sql.VarChar, tituloLivro)
-                .input('anoPublicacao', sql.Int, anoPublicacao)
-                .input('qtdExemplares', sql.Int, qtdExemplares)
-                .input('nomeAutor', sql.VarChar, nomeAutor)
+                .input("tituloLivro", sql.VarChar, tituloLivro)
+                .input("anoPublicacao", sql.Int, anoPublicacao)
+                .input("qtdExemplares", sql.Int, qtdExemplares)
+                .input("nomeAutor", sql.VarChar, nomeAutor)
                 .query(querySQL);
 
             return { mensagem: "Livro cadastrado com sucesso!" };
@@ -40,8 +38,7 @@ const LivroModel = {
             console.error("Erro ao cadastrar livro:", error);
             throw error;
         }
-    },
+    }
+};
 
-}
-
-module.exports = {LivroModel};
+module.exports = { livrosModel };

@@ -1,6 +1,7 @@
-const { livrosModel } = require("../models/Livrosmodel");
+const { Router } = require("express");
+const {livrosModel} = require("../models/livrosModel");
 
-const LivroController = {
+const livroController = {
 
     listarLivros: async (req, res) => {
         try {
@@ -18,7 +19,7 @@ const LivroController = {
             const { tituloLivro, anoPublicacao, qtdExemplares, nomeAutor } = req.body;
 
             if (!tituloLivro || !anoPublicacao || !qtdExemplares || !nomeAutor) {
-                return res.status(400).json({ error: "Campos obrigatórios faltando." });
+                return res.status(400).json({ erro: "Campos obrigatórios faltando." });
             }
 
             await livrosModel.CadastrarLivro({
@@ -35,5 +36,6 @@ const LivroController = {
             res.status(500).json({ erro: "Erro ao cadastrar livro" });
         }
     }
-}
-module.exports = {LivroController};
+};
+
+module.exports = { livroController };
