@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const livrosRoutes = require("./src/routes/livrosRoutes");
+const livrosRoutes = require("./src/routes/livrosroutes");
 
 const PORT = 8081;
 
